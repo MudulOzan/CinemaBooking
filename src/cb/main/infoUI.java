@@ -138,6 +138,15 @@ public class infoUI extends JFrame {
 		contentPane.add(btnBack);
 		
 		JLabel btnPurchase = new JLabel("");
+		btnPurchase.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				purchaseUI pUI = new purchaseUI(movie);
+				setVisible(false);
+				pUI.setVisible(true);
+				pUI.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			}
+		});
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnPurchase, 0, SpringLayout.NORTH, lblDirectedBy);
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnPurchase, -10, SpringLayout.EAST, contentPane);
 		btnPurchase.setIcon(new ImageIcon(infoUI.class.getResource("/org/eclipse/jface/text/source/projection/images/collapsed@2x.png")));
