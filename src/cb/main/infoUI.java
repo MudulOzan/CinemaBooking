@@ -26,6 +26,7 @@ public class infoUI extends JFrame {
 		setContentPane(contentPane);
 		SpringLayout sl_contentPane = new SpringLayout();
 		contentPane.setLayout(sl_contentPane);
+		setResizable(false);
 		
 		JLabel image = new JLabel("");
 		image.setIcon(new ImageIcon(infoUI.class.getResource("/cb/main/" + movie.image + ".jpg")));
@@ -141,7 +142,7 @@ public class infoUI extends JFrame {
 		btnPurchase.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				purchaseUI pUI = new purchaseUI(infoFrame, movie, "12-00");
+				purchaseUI pUI = new purchaseUI(infoFrame, movie, "Adult", "12-00");
 				setVisible(false);
 				pUI.setVisible(true);
 				pUI.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

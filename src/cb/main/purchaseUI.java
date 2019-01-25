@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.SpringLayout;
@@ -37,7 +38,7 @@ public class purchaseUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public purchaseUI(JFrame frame, Movie movie, String pTime) {
+	public purchaseUI(JFrame frame, Movie movie, String pType, String pTime) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 685, 500);
 		contentPane = new JPanel();
@@ -45,6 +46,8 @@ public class purchaseUI extends JFrame {
 		setContentPane(contentPane);
 		SpringLayout sl_contentPane = new SpringLayout();
 		contentPane.setLayout(sl_contentPane);
+		setResizable(false);
+		
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 4; j++) {
 				lblSeats[i][j] = new JLabel("");
@@ -300,6 +303,8 @@ public class purchaseUI extends JFrame {
 			lblD.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			contentPane.add(lblD);
 	
+
+			
 			JComboBox cbTicketType = new JComboBox();
 			sl_contentPane.putConstraint(SpringLayout.WEST, lblTime, 18, SpringLayout.EAST, cbTicketType);
 			sl_contentPane.putConstraint(SpringLayout.NORTH, cbTicketType, 10, SpringLayout.NORTH, contentPane);
@@ -321,6 +326,21 @@ public class purchaseUI extends JFrame {
 			cbTime.addItem("18:30");
 			contentPane.add(cbTime);
 			
+			cbTicketType.setSelectedItem(pType);
+			int price = cbTicketType.getSelectedIndex() == 0 ? 10 : 5;
+		
+			JTextField jtfPrice = new JTextField(price + " PLN");
+			cbTicketType.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					jtfPrice.setText(Integer.toString(cbTicketType.getSelectedIndex() == 0 ? 10 : 5) + " PLN");
+					
+				}
+			});	
+			jtfPrice.setEditable(false);
+			sl_contentPane.putConstraint(SpringLayout.NORTH, jtfPrice, -1, SpringLayout.NORTH, cbTicketType);
+			sl_contentPane.putConstraint(SpringLayout.WEST, jtfPrice, 10, SpringLayout.EAST, cbTime);
+			contentPane.add(jtfPrice);
 			
 			
 			cbTime.setSelectedItem(pTime.replace("-", ":"));
@@ -346,7 +366,7 @@ public class purchaseUI extends JFrame {
 								seats[i][j] = Integer.parseInt(reader.nextLine());
 							}
 						}
-						purchaseUI pUI = new purchaseUI(frame, movie, cbTime.getSelectedItem().toString().replace(":", "-"));
+						purchaseUI pUI = new purchaseUI(frame, movie, cbTicketType.getSelectedItem().toString(), cbTime.getSelectedItem().toString().replace(":", "-"));
 						pUI.setVisible(true);
 						pUI.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 						dispose();
@@ -356,8 +376,8 @@ public class purchaseUI extends JFrame {
 					}
 				}			
 			});
-			sl_contentPane.putConstraint(SpringLayout.NORTH, btnShow, -1, SpringLayout.NORTH, cbTicketType);
-			sl_contentPane.putConstraint(SpringLayout.WEST, btnShow, 10, SpringLayout.EAST, cbTime);
+			sl_contentPane.putConstraint(SpringLayout.NORTH, btnShow, -2, SpringLayout.NORTH, cbTicketType);
+			sl_contentPane.putConstraint(SpringLayout.WEST, btnShow, 10, SpringLayout.EAST, jtfPrice);
 			contentPane.add(btnShow);
 	
 			JButton btnPurchase = new JButton("PURCHASE");

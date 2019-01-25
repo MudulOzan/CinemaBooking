@@ -31,6 +31,7 @@ public class Booking extends JFrame {
 					Booking frame = new Booking();
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
