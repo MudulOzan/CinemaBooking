@@ -136,12 +136,12 @@ public class infoUI extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnBack, 0, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnBack, -10, SpringLayout.EAST, contentPane);
 		contentPane.add(btnBack);
-		
+		JFrame infoFrame = this;
 		JLabel btnPurchase = new JLabel("");
 		btnPurchase.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				purchaseUI pUI = new purchaseUI(movie);
+				purchaseUI pUI = new purchaseUI(infoFrame, movie, "12-00");
 				setVisible(false);
 				pUI.setVisible(true);
 				pUI.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
